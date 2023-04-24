@@ -1,0 +1,216 @@
+[
+
+    {
+
+        "name" : "SteelSeries Rival 5",
+
+        "price" : "5000",
+
+        "description" : "The Rival 5 is the most versatile precision gaming mouse. Customize its 9 programmable buttons to fit your gameplay, including our custom quick-action toggle switch that's built for lightning fast reaction plays.",
+
+        "ratings" : 4.5,
+
+        "images" : [{
+
+            "public_id" : "products/SteelSeries_Rival_5_mjcsfn",
+
+            "url" : "https://res.cloudinary.com/dn638duad/image/upload/v1680682424/pc-master/SteelSeries_Rival_5_mjcsfn.png"
+
+        }],
+
+        "category" : "Mouse",
+
+        "seller" : "PC Express",
+
+        "stock" : 50,
+
+        "numOfReviews" : 32,
+
+        "reviews": []
+
+    },
+    {
+
+        "name" : "Logitech G502 X Lightspeed.",
+
+        "price" : "4000",
+
+        "description" : "G502 X LIGHTSPEED is the latest addition to legendary G502 lineage. Redesigned and reinvented with the most innovative gaming technologies, including our first-ever LIGHTFORCE hybrid switches, LIGHTSPEED pro-grade wireless, and HERO 25K. G502 X LIGHTSPEED is also POWERPLAY compatible—so it never runs out of power.",
+
+        "ratings" : 4.4,
+
+        "images" : [{
+
+            "public_id" : "products/Logitech_G502_X_Lightspeed_mhnycf",
+
+            "url" : "https://res.cloudinary.com/dn638duad/image/upload/v1680682421/pc-master/Logitech_G502_X_Lightspeed_mhnycf.jpg"
+
+        }],
+
+        "category" : "Mouse",
+
+        "seller" : "PC Express",
+
+        "stock" : 50,
+
+        "numOfReviews" : 32,
+
+        "reviews": []
+
+    },
+
+
+
+
+    {
+
+        "name" : "SteelSeries Apex Pro TKL",
+
+        "price" : "10000.25",
+
+        "description" : "World's fastest OmniPoint 2.0 adjustable switches with 11x quicker response and 10x swifter actuation. Customize the sensitivity of every key from a speedy 0.2mm to a deliberate 3.8mm. Program two different actions to the same key for powerful gaming shortcuts.",
+
+        "ratings" : 5.0,
+
+        "images" : [{
+
+            "public_id" : "products/SteelSeries_Apex_Pro_TKL_gtm6pr",
+
+            "url" : "https://res.cloudinary.com/dn638duad/image/upload/v1680682431/pc-master/SteelSeries_Apex_Pro_TKL_gtm6pr.jpg"
+
+        }],
+
+        "category" : "Keyboards",
+
+        "seller" : "Amazon",
+
+        "stock" : 1,
+
+        "numOfReviews" : 12,
+
+        "reviews": []
+
+    },
+
+    {
+
+        "name" : "Logitech G715",
+
+        "price" : "15000 ",
+
+        "description" : "From the Aurora Collection, G715 is a gaming-grade LIGHTSPEED wireless and Bluetooth® keyboard designed for comfort with included cloud-soft palm rest. Fully equipped with RGB lighting and your choice of GX mechanical switches. Comes in White Mist.",
+
+        "ratings" : 4.5,
+
+        "images" : [{
+
+            "public_id" : "products/Logitech_G715_md7wu9",
+
+            "url" : "https://res.cloudinary.com/dn638duad/image/upload/v1680682430/pc-master/Logitech_G715_md7wu9.jpg"
+
+        }],
+
+        "category" : "Keyboards",
+
+        "seller" : "Amazon",
+
+        "stock" : 11,
+
+        "numOfReviews" : 112,
+
+        "reviews": []
+
+    },
+    
+
+    {
+
+        "name" : "Rode’s NT-USB",
+
+        "price" : "3000 ",
+
+        "description" : "Record podcasts, voice-overs, and even sung vocals for your productions with the RODE NT-USB, a USB microphone that captures broadcast-quality recordings in your home studio or mobile setup.",
+
+        "ratings" : 4.5,
+
+        "images" : [{
+
+            "public_id" : "products/Rode-NT_twmqjl",
+
+            "url" : "https://res.cloudinary.com/dn638duad/image/upload/v1680682439/pc-master/Rode-NT_twmqjl.png"
+
+        }],
+
+        "category" : "Microphone",
+
+        "seller" : "Amazon",
+
+        "stock" : 11,
+
+        "numOfReviews" : 112,
+
+        "reviews": []
+
+    },
+    
+    {
+
+        "name" : " Elgato Wave:3",
+
+        "price" : "4000 ",
+
+        "description" : " Premium Studio Quality USB Condenser Microphone for Streaming, Podcast, Gaming and Home Office, Free Mixer Software, Sound Effect Plugins, Anti-Distortion, Plug 'n Play, for Mac, PC.",
+
+        "ratings" : 4.5,
+
+        "images" : [{
+
+            "public_id" : "products/Elgato_Wave3_yokhff",
+
+            "url" : "https://res.cloudinary.com/dn638duad/image/upload/v1680682434/pc-master/Elgato_Wave3_yokhff.jpg"
+
+        }],
+
+        "category" : "Microphone",
+
+        "seller" : "Amazon",
+
+        "stock" : 11,
+
+        "numOfReviews" : 112,
+
+        "reviews": []
+
+    },
+
+    {
+
+        "name" : " Elgato Wave:3",
+
+        "price" : "4000 ",
+
+        "description" : " Premium Studio Quality USB Condenser Microphone for Streaming, Podcast, Gaming and Home Office, Free Mixer Software, Sound Effect Plugins, Anti-Distortion, Plug 'n Play, for Mac, PC.",
+
+        "ratings" : 4.5,
+
+        "images" : [{
+
+            "public_id" : "products/headphones_t2afnb",
+
+            "url" : ""
+
+        }],
+
+        "category" : "Microphone",
+
+        "seller" : "Amazon",
+
+        "stock" : 11,
+
+        "numOfReviews" : 112,
+
+        "reviews": []
+
+    }
+    
+]
