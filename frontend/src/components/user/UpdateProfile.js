@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { useNavigate } from "react-router-dom";
 
+import { toast } from "react-toastify";
+
 import {
   updateProfile,
   loadUser,
@@ -20,10 +22,14 @@ import {
   MDBCol,
 } from "mdb-react-ui-kit";
 
-const UpdateProfile = () => {
-  const [name, setName] = useState("");
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 
-  const [email, setEmail] = useState("");
+const UpdateProfile = () => {
+  const [name, setName] = useState("No available name");
+
+  const [email, setEmail] = useState("example@email.com");
 
   const [avatar, setAvatar] = useState("");
 
@@ -40,7 +46,33 @@ const UpdateProfile = () => {
   const { error, isUpdated, loading } = useSelector((state) => state.user);
   
 
-  // console.log(error)
+  const schema = yup.object({
+    email: yup
+      .string()
+      .email("Invalid email address")
+      .required("Email is required"),
+    name: yup
+      .string()
+      .required("Name is required")
+  });
+  
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
+
+  const success = (message = "") =>
+    toast.success(message, {
+      position: toast.POSITION.BOTTOM_CENTER,
+    });
+
+  const notify = (error = "") =>
+    toast.error(error, {
+      position: toast.POSITION.BOTTOM_CENTER,
+    });
 
   useEffect(() => {
     console.log(isUpdated);
@@ -54,13 +86,13 @@ const UpdateProfile = () => {
     }
 
     if (error) {
-      // alert.error(error);
+      notify(error);
 
       dispatch(clearErrors());
     }
 
     if (isUpdated) {
-      // alert.success('User updated successfully')
+      success("User updated successfully");
 
       dispatch(loadUser());
 
@@ -73,7 +105,7 @@ const UpdateProfile = () => {
   }, [dispatch, error, isUpdated, navigate, user]);
 
   const submitHandler = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
 
     const formData = new FormData();
 
@@ -109,7 +141,7 @@ const UpdateProfile = () => {
           <MDBCol className="shadow-lg p-4 rounded-8 col-sm-6">
           <form
             className=""
-            onSubmit={submitHandler}
+            onSubmit={handleSubmit(submitHandler)}
             encType="multipart/form-data"
           >
             <h1 className="mt-2 mb-5 text-center"><b>Update Profile</b></h1>
@@ -118,26 +150,30 @@ const UpdateProfile = () => {
               <label htmlFor="email_field"><b>Name</b></label>
 
               <input
+                {...register("name")}
                 type="name"
                 id="name_field"
-                className="form-control"
+                className={`form-control m-0 ${errors.name ? "is-invalid" : ""}`}
                 name="name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
               />
+              <p className="text-danger">{errors.name?.message}</p>
             </div>
 
             <div className="form-group">
               <label htmlFor="email_field"><b>Email</b></label>
 
               <input
-                type="email"
+               {...register("email")}
+                type="text"
                 id="email_field"
-                className="form-control"
+                className={`form-control m-0 ${errors.email ? "is-invalid" : ""}`}
                 name="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
+              <p className="text-danger">{errors.email?.message}</p>
             </div>
 
             <div className="form-group">

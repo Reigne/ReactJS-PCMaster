@@ -16,13 +16,12 @@ import Loader from "./layout/Loader";
 
 import { MDBContainer, MDBRow, MDBCol } from "mdb-react-ui-kit";
 
-import InfiniteScroll from "react-infinite-scroll-component";
-
 const Home = () => {
+  const [hasMore, sethasMore] = useState(true);
+  const [items, setItems] = useState([]);
+  const [page, setpage] = useState(2);
   const dispatch = useDispatch();
-  const [dataSource, setDataSource ] = useState([]);
-  const [hasMore, setHasMore] = useState(true);
-
+  
   const {
     loading,
     products,
@@ -59,29 +58,17 @@ const Home = () => {
   const createSliderWithTooltip = Slider.createSliderWithTooltip;
   const Range = createSliderWithTooltip(Slider.Range);
 
-  const fetchMoreData = () => {
-    const pageNumber = currentPage + 1;
-    
-    if(products.length < 200){
-      setTimeout(() => {
-        dispatch(getProducts(keyword, pageNumber, price, category));
-        setDataSource((prevDataSource) =>
-          prevDataSource.concat(Array.from({ length: 20 }))
-        );
-      }, 500);
-    } else{
-      setHasMore(false);
-    }
-
-
-    // dispatch(getProducts(keyword, pageNumber, price, category)).then((products) => {
-    //   if (products.length === 200) {
-    //     setHasMore(false);
-    //   }
-    //   setCurrentPage(pageNumber);
-    // });
-  };
   useEffect(() => {
+    const getProduts = async () => {
+      const res = await fetch(
+        // For json server use url below
+        `${process.env.REACT_APP_API}/api/v1/products?_page=1&_limit=20`
+        // `http://localhost:3004/comments?_page=1&_limit=20`
+      );
+      const data = await res.json();
+      setItems(data);
+    };
+
     if (error) {
       // return alert.error(error)
       notify(error);
@@ -98,7 +85,7 @@ const Home = () => {
     let count = filteredProductsCount;
   }
   console.log(keyword, count, filteredProductsCount, resPerPage);
-  
+
   return (
     <Fragment>
       {loading ? (
@@ -160,27 +147,39 @@ const Home = () => {
 
                   <MDBCol className="col-6 col-md-9">
                     <div className="row">
-                      {products.map((product) => (
-                        <Product key={product._id} product={product} col={4} />
-                      ))}
+                        {products.map((product) => (
+                          <Product
+                            key={product._id}
+                            product={product}
+                            col={4}
+                          />
+                        ))}
                     </div>
                   </MDBCol>
                 </Fragment>
               ) : (
-                <InfiniteScroll
-                  dataLength={products.length}
-                  next={fetchMoreData}
-                  hasMore={hasMore}
-                  loader={<p>Loading...</p>}
-                >
-                  {products.map((product) => (
-                    <Product key={product._id} product={product}/>
-                  ))}
-                </InfiniteScroll>
+                products.map((product) => (
+                  <Product key={product._id} product={product} col={3} />
+                ))
               )}
             </div>
           </section>
-        
+          {resPerPage <= count && (
+            <div className="d-flex justify-content-center mt-5">
+              <Pagination
+                activePage={currentPage}
+                itemsCountPerPage={resPerPage}
+                totalItemsCount={productsCount}
+                onChange={setCurrentPageNo}
+                nextPageText={"Next"}
+                prevPageText={"Prev"}
+                firstPageText={"First"}
+                lastPageText={"Last"}
+                itemClass="page-item"
+                linkClass="page-link"
+              />
+            </div>
+          )}
         </Fragment>
       )}
     </Fragment>

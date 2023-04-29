@@ -28,19 +28,19 @@ import * as yup from "yup";
 
 
 const UpdateProduct = () => {
-  const [name, setName] = useState("");
+  const [name, setName] = useState("Untitled Product");
 
   const [price, setPrice] = useState(0);
 
-  const [description, setDescription] = useState("");
+  const [description, setDescription] = useState("No description available.");
 
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState("Uncategorized");
 
-  const [brand, setBrand] = useState("");
+  const [brand, setBrand] = useState("Unknown Brand");
 
   const [stock, setStock] = useState(0);
 
-  const [seller, setSeller] = useState("");
+  const [seller, setSeller] = useState("Unknown Seller");
 
   const [images, setImages] = useState([]);
 
@@ -50,6 +50,7 @@ const UpdateProduct = () => {
 
   const categories = [
     "Select category...",
+    "Mouse",
     "Mouse",
     "KeyBoard",
     "Headset",
@@ -62,6 +63,7 @@ const UpdateProduct = () => {
     "Storage",
     "Power Supply Unit",
     "Gaming Peripherals",
+    "Uncategorized",
   ];
 
   const brands = [
@@ -98,6 +100,7 @@ const UpdateProduct = () => {
     "ADATA",
     "Redragon",
     "Cougar",
+    "Unknown Brand",
   ];
 
 
@@ -111,7 +114,7 @@ const UpdateProduct = () => {
     price: yup
       .number()
       .typeError("Price must be a numeric")
-      .min(1, "Price must be greater than zero.")
+      .min(0, "Price must be greater than zero.")
       .required("Price is required"),
     description: yup
       .string()
@@ -135,9 +138,9 @@ const UpdateProduct = () => {
     images: yup
       .mixed()
       .required("Images are required")
-      .test("fileCount", "Please upload at least 1 images", (value) => {
-        return value && value.length >= 1;
-      }),
+      // .test("fileCount", "Please upload at least 1 images", (value) => {
+      //   return value && value.length > 0;
+      // }),
   });
   
   const {
@@ -146,6 +149,7 @@ const UpdateProduct = () => {
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
+   
   });
 
   console.log(errors);
@@ -337,6 +341,7 @@ const UpdateProduct = () => {
                         id="customFile"
                         width="105"
                         height="99"
+                        value={images}
                         onChange={onChange}
                         multiple
                       />
@@ -358,13 +363,12 @@ const UpdateProduct = () => {
                       <div class="col-12 col-sm-6">
                         <label>Name</label>
                         <input
-                          {...register("name", { defaultValue: name })}
+                          {...register("name")}
                           type="text"
                           id="name_field"
                           className={`form-control m-0 ${errors.name ? "is-invalid" : ""}`}
                           value={name}
                           onChange={(e) => setName(e.target.value)}
-                          defaultValue={name}
                         />
                         <p className="text-danger">{errors.name?.message}</p>
                       </div>
@@ -387,7 +391,7 @@ const UpdateProduct = () => {
                       <div class="col-12 col-sm-6">
                         <label>Category</label>
                         <select
-                        {...register("category")}
+                          {...register("category")}
                           className={`form-control m-0 ${errors.category ? "is-invalid" : ""}`}
                           id="category_field"
                           value={category}

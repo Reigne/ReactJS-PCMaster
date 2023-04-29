@@ -21,7 +21,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
 const Payment = () => {
-  //   const alert = use  ()
 
   const dispatch = useDispatch();
 
@@ -39,8 +38,6 @@ const Payment = () => {
 
   useEffect(() => {
     if (error) {
-      //   alert.error(error)
-
       dispatch(clearErrors());
     }
   }, [dispatch, error]);

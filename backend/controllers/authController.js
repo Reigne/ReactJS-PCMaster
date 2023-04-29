@@ -92,6 +92,7 @@ exports.loginUser = async (req, res, next) => {
   // });
   sendToken(user, 200, res);
 };
+
 exports.logout = async (req, res, next) => {
   res.cookie("token", null, {
     expires: new Date(Date.now()),
@@ -103,6 +104,7 @@ exports.logout = async (req, res, next) => {
     message: "Logged out",
   });
 };
+
 exports.forgotPassword = async (req, res, next) => {
   const user = await User.findOne({ email: req.body.email });
   if (!user) {

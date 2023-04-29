@@ -50,6 +50,7 @@ const productSchema = new mongoose.Schema({
         "Storage",
         "Power Supply Unit",
         "Gaming Peripherals",
+        "Uncategorized",
       ],
       message: "Please choose the suitable product category.",
     },
@@ -92,6 +93,7 @@ const productSchema = new mongoose.Schema({
         "ADATA",
         "Redragon",
         "Cougar",
+        "Unknown Brand"
       ],
       message: "Please choose the suitable product brand.",
     },

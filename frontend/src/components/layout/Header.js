@@ -37,7 +37,7 @@ const Header = () => {
               />
             </Link>
           </div>
-          <div className="col-md-4 mb-3">
+          <div className="col-md-4 mb-3" style={{ zIndex : 999 }}>
             <Search />
           </div>
           <nav>

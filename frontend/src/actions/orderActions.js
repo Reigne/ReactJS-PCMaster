@@ -21,6 +21,9 @@ import {
   DELETE_ORDER_SUCCESS,
   DELETE_ORDER_RESET,
   DELETE_ORDER_FAIL,
+  USER_SALES_REQUEST,
+  USER_SALES_SUCCESS,
+  USER_SALES_FAIL,
 } from "../constants/orderConstants";
 
 export const createOrder = (order) => async (dispatch, getState) => {

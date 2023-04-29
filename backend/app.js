@@ -7,8 +7,10 @@ const order = require("./routes/order");
 var cors = require("cors");
 const app = express();
 // const fileUpload = require('express-fileupload')
-
-// app.use(cors());
+app.use(cors({
+    origin: "http://localhost:3000",
+    credentials: true
+}));
 // app.use(express.json());
 app.use(cookieParser());
 // app.use(express.urlencoded({ limit: "50mb", extended: true }));

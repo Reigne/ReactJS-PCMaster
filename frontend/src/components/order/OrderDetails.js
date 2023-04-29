@@ -43,10 +43,12 @@ const OrderDetails = () => {
   let { id } = useParams();
 
   const handleExportPdf = (event) => {
+    const fileName = `Receipt-Order-${order._id}.pdf`;
     savePDF(contentArea.current, {
       paperSize: "A4",
       scale: 0.6,
       margin: "2cm",
+      fileName,
     });
   };
 
@@ -191,7 +193,7 @@ const OrderDetails = () => {
                     </div>
                   </div>
                 </MDBCol>
-                <MDBCol className="col-12 shadow-5 rounded-8 p-3 my-3">
+                <MDBCol className="col-12 shadow-5 rounded-8 p-3 my-3" >
                     <PDFExport
                       ref={pdfExportComponent}
                       scale={0.6}
@@ -341,6 +343,7 @@ const OrderDetails = () => {
                 </p>
 
                 <PDFExport
+                
                     ref={pdfExportComponent}
                     scale={0.6}
                     paperSize="A4"
