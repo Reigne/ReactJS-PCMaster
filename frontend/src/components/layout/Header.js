@@ -4,7 +4,8 @@ import { Link } from "react-router-dom";
 import Search from "./Search";
 import { useDispatch, useSelector } from "react-redux";
 // import { useAlert } from 'react-alert'
-import { logout } from "../../actions/userActions";
+import { logout, login } from "../../actions/userActions";
+
 import {
   MDBBadge,
   MDBBtn,
@@ -14,15 +15,36 @@ import {
   MDBDropdownItem,
 } from "mdb-react-ui-kit";
 
+import { toast } from "react-toastify";
+
 const Header = () => {
   const dispatch = useDispatch();
   const { user, loading } = useSelector((state) => state.auth);
   const { cartItems } = useSelector((state) => state.cart);
+
   // const { cartItems } = useSelector(state => state.cart)
+
+
+  const errMsg = (message = "") =>
+    toast.error(message, {
+      position: toast.POSITION.BOTTOM_CENTER,
+    });
+
+  const successMsg = (message = "") =>
+    toast.success(message, {
+      position: toast.POSITION.BOTTOM_CENTER,
+    });
+
   const logoutHandler = () => {
     dispatch(logout());
-    alert.success("Logged out successfully.");
+    successMsg("Logged out successfully.");
   };
+  
+  const loginHandler = () => {
+     dispatch(login(() => {
+    successMsg("Login successfully!");
+  }));
+  }
 
   return (
     <Fragment>
@@ -37,7 +59,7 @@ const Header = () => {
               />
             </Link>
           </div>
-          <div className="col-md-4 mb-3" style={{ zIndex : 999 }}>
+          <div className="col-md-4 mb-3" style={{ zIndex: 999 }}>
             <Search />
           </div>
           <nav>
@@ -139,7 +161,7 @@ const Header = () => {
           ) : (
             !loading && (
               <a className="cta">
-                <Link to="/login">
+                <Link to="/login" onClick={loginHandler}>
                   <button className="button__nav">Login</button>
                 </Link>
               </a>

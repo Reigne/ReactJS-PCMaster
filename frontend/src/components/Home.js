@@ -55,7 +55,9 @@ const Home = () => {
     toast.error(error, {
       position: toast.POSITION.BOTTOM_CENTER,
     });
+
   const createSliderWithTooltip = Slider.createSliderWithTooltip;
+  
   const Range = createSliderWithTooltip(Slider.Range);
 
   useEffect(() => {
