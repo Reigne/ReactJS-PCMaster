@@ -26,6 +26,8 @@ import { MDBContainer, MDBRow, MDBCol } from "mdb-react-ui-kit";
 
 import { PDFExport, savePDF } from "@progress/kendo-react-pdf";
 
+import Swal from "sweetalert2";
+
 const ProcessOrder = () => {
   const dispatch = useDispatch();
 
@@ -85,16 +87,26 @@ const ProcessOrder = () => {
   }, [dispatch, error, isUpdated, orderId]);
 
   const updateOrderHandler = (id) => {
-    const formData = new FormData();
+    Swal.fire({
+      title: "Update Order Status",
+      icon: "info",
+      text: "Do you want to update this order status?",
+      confirmButtonText: "Update",
+      showCancelButton: true,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const formData = new FormData();
 
-    formData.set("status", status);
+        formData.set("status", status);
 
-    dispatch(updateOrder(id, formData));
+        dispatch(updateOrder(id, formData));
 
-    if (status === "Delivered") {
-      // savePDF(contentArea.current, { paperSize: "A4" });
-      pdfExportComponent.current.save();
-    }
+        if (status === "Delivered") {
+          // savePDF(contentArea.current, { paperSize: "A4" });
+          pdfExportComponent.current.save();
+        }
+      }
+    });
   };
 
   const shippingDetails =
@@ -203,7 +215,7 @@ const ProcessOrder = () => {
                               />
                             </div>
                             <div className="col-5 col-lg-4">
-                              <Link to={`/products/${item.product}`}>
+                              <Link to={`/product/${item.product}`}>
                                 {item.name}
                               </Link>
                             </div>

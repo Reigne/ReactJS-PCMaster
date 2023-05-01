@@ -5,29 +5,6 @@ const sendToken = require("../utils/jwtToken");
 const sendEmail = require("../utils/sendEmail");
 const cloudinary = require("cloudinary").v2;
 
-// exports.registerUser = async (req, res, next) => {
-//   const result = await cloudinary.uploader.upload(
-//     req.body.avatar,
-//     {
-//       folder: "avatars",
-//       width: 150,
-//       crop: "scale",
-//     },
-//     (err, res) => {
-//       console.log(err, res);
-//     }
-//   );
-//   const { name, email, password, role } = req.body;
-//   const user = await User.create({
-//     name,
-//     email,
-//     password,
-//     avatar: {
-//       public_id: result.public_id,
-//       url: result.secure_url,
-//     },
-//   });
-
 exports.registerUser = async (req, res, next) => {
   const result = await cloudinary.uploader.upload(
     req.body.avatar,
@@ -40,7 +17,6 @@ exports.registerUser = async (req, res, next) => {
       console.log(err, res);
     }
   );
-  // return console.log(result)
 
   const { name, email, password } = req.body;
 
@@ -55,18 +31,10 @@ exports.registerUser = async (req, res, next) => {
   });
   sendToken(user, 200, res);
 };
-//test token
-// const token = user.getJwtToken();
-// res.status(201).json({
-//     success: true,
-//     user,
-//     token
-// })
-//   sendToken(user, 200, res);
-// };
 
 exports.loginUser = async (req, res, next) => {
   const { email, password } = req.body;
+  
   // Checks if email and password is entered by user
   if (!email || !password) {
     return next(new ErrorHandler("Please enter email & password", 400));
@@ -84,12 +52,7 @@ exports.loginUser = async (req, res, next) => {
   if (!isPasswordMatched) {
     return next(new ErrorHandler("Invalid Email or Password", 401));
   }
-  // const token = user.getJwtToken();
 
-  // res.status(201).json({
-  //     success: true,
-  //     token
-  // });
   sendToken(user, 200, res);
 };
 
@@ -113,8 +76,8 @@ exports.forgotPassword = async (req, res, next) => {
   // Get reset token
   const resetToken = user.getResetPasswordToken();
   await user.save({ validateBeforeSave: false });
+  
   // Create reset password url
-  // const resetUrl = `${req.protocol}://${req.get('host')}/password/reset/${resetToken}`;
   const resetUrl = `${process.env.FRONTEND_URL}/password/reset/${resetToken}`;
 
   const message = `<p>Your password reset token is as follow:\n\n<a href="${resetUrl}">Reset Password</a>\n\nIf you have not requested this email, then ignore it.</p>`
@@ -124,7 +87,7 @@ exports.forgotPassword = async (req, res, next) => {
   try {
       await sendEmail({
           email: user.email,
-          subject: 'PC Master Password Recovery',
+          subject: 'ShopIT Password Recovery',
           message,
           html
       })
@@ -362,6 +325,7 @@ exports.forgotPassword = async (req, res, next) => {
 
       message: `Email sent to: ${user.email}`,
     });
+
   } catch (error) {
     user.resetPasswordToken = undefined;
 

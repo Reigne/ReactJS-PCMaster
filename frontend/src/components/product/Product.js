@@ -18,11 +18,9 @@ import {
 
 const Product = ({ product }) => {
   return (
-
-
     <MDBRow className="col-12 col-lg-3 mr-2 mt-3 bg-transparent">
       <MDBCol>
-        <MDBCard className="rounded-7 p-2">
+        <MDBCard className="rounded-7 p-1">
           {/* <MDBCardImage src={product.images[0].url} alt="..." position="top" /> */}
 
           {/* <MDBRipple

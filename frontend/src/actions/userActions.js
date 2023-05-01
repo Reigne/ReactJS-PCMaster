@@ -196,59 +196,47 @@ export const updatePassword = (passwords) => async (dispatch) => {
 
 export const forgotPassword = (email) => async (dispatch) => {
   try {
-    dispatch({ type: FORGOT_PASSWORD_REQUEST });
-
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
-
-    const { data } = await axios.post(`/api/v1/password/forgot`, email, config);
-
-    dispatch({
-      type: FORGOT_PASSWORD_SUCCESS,
-
-      payload: data.message,
-    });
+      dispatch({ type: FORGOT_PASSWORD_REQUEST })
+      const config = {
+          headers: {
+              'Content-Type': 'application/json'
+          }
+      }
+      const { data } = await axios.post('/api/v1/password/forgot', email, config)
+      dispatch({
+          type: FORGOT_PASSWORD_SUCCESS,
+          payload: data.message
+      })
   } catch (error) {
-    dispatch({
-      type: FORGOT_PASSWORD_FAIL,
-
-      payload: error.response.data.message,
-    });
+      dispatch({
+          type: FORGOT_PASSWORD_FAIL,
+          payload: error.response.data.message
+      })
   }
-};
+
+}
 
 export const resetPassword = (token, passwords) => async (dispatch) => {
   try {
-    dispatch({ type: NEW_PASSWORD_REQUEST });
-
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
-
-    const { data } = await axios.put(
-      `/api/v1/password/reset/${token}`,
-      passwords,
-      config
-    );
-
-    dispatch({
-      type: NEW_PASSWORD_SUCCESS,
-
-      payload: data.success,
-    });
+      dispatch({ type: NEW_PASSWORD_REQUEST })
+      const config = {
+          headers: {
+              'Content-Type': 'application/json'
+          }
+      }
+      const { data } = await axios.put(`/api/v1/password/reset/${token}`, passwords, config)
+      dispatch({
+          type: NEW_PASSWORD_SUCCESS,
+          payload: data.success
+      })
   } catch (error) {
-    dispatch({
-      type: NEW_PASSWORD_FAIL,
-
-      payload: error.response.data.message,
-    });
+      dispatch({
+          type: NEW_PASSWORD_FAIL,
+          payload: error.response.data.message
+      })
   }
-};
+
+}
 
 export const allUsers = () => async (dispatch) => {
   try {

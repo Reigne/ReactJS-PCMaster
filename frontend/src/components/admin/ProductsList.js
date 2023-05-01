@@ -26,6 +26,8 @@ import { MDBContainer, MDBRow, MDBCol } from "mdb-react-ui-kit";
 
 import Swal from "sweetalert2";
 
+import Toast from "../layout/Toast";
+
 const ProductsList = () => {
   //   const alert = useAlert();
 
@@ -44,18 +46,19 @@ const ProductsList = () => {
 
     if (error) {
       //   alert.error(error);
-
+      Toast((error), "danger");
       dispatch(clearErrors());
     }
 
     if (deleteError) {
       // alert.error(deleteError);
+      Toast((deleteError), "danger");
 
       dispatch(clearErrors());
     }
 
     if (isDeleted) {
-      // alert.success("Product deleted successfully");
+      Toast("Product deleted successfully", "success");
 
       navigate("/admin/products");
 

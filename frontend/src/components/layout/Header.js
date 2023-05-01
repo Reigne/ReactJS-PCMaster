@@ -66,8 +66,8 @@ const Header = () => {
             {user ? (
               <ul className="nav__links">
                 <li>
-                  <Link to="/">
-                    <a to="/">Shop</a>
+                  <Link to="/" style={{ color: "black" }}>
+                    <a >Shop</a>
                   </Link>
                 </li>
                 <li>

@@ -53,9 +53,9 @@ const UpdateUser = () => {
   });
 
 
-  const [name, setName] = useState("");
+  const [name, setName] = useState("Unavaible user name");
 
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState("example@example.com");
 
   const [role, setRole] = useState("");
 

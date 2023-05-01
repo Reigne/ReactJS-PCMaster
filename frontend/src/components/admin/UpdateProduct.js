@@ -25,8 +25,7 @@ import { MDBContainer, MDBRow, MDBCol, MDBBtn } from "mdb-react-ui-kit";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-
-
+import Swal from "sweetalert2";
 const UpdateProduct = () => {
   const [name, setName] = useState("Untitled Product");
 
@@ -103,12 +102,11 @@ const UpdateProduct = () => {
     "Unknown Brand",
   ];
 
-
   const dispatch = useDispatch();
 
   const schema = yup.object({
     name: yup
-      .string() 
+      .string()
       .max(100, "Product name must be at most 100 characters")
       .required("Name of the product is required"),
     price: yup
@@ -116,9 +114,7 @@ const UpdateProduct = () => {
       .typeError("Price must be a numeric")
       .min(0, "Price must be greater than zero.")
       .required("Price is required"),
-    description: yup
-      .string()
-      .required("Description is required"),
+    description: yup.string().required("Description is required"),
     category: yup
       .string()
       .notOneOf(["Select category..."], "Please select a valid category")
@@ -132,24 +128,19 @@ const UpdateProduct = () => {
       .typeError("Stock must be a numeric")
       .min(0, "Stock must be greater than or equal to zero.")
       .required("Stock is required"),
-    seller: yup
-      .string()
-      .required("Seller name is required"),
-    images: yup
-      .mixed()
-      .required("Images are required")
-      // .test("fileCount", "Please upload at least 1 images", (value) => {
-      //   return value && value.length > 0;
-      // }),
+    seller: yup.string().required("Seller name is required"),
+    images: yup.mixed().required("Images are required"),
+    // .test("fileCount", "Please upload at least 1 images", (value) => {
+    //   return value && value.length > 0;
+    // }),
   });
-  
+
   const {
     handleSubmit,
     register,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
-   
   });
 
   console.log(errors);
@@ -172,6 +163,11 @@ const UpdateProduct = () => {
 
   const successMsg = (message = "") =>
     toast.success(message, {
+      position: toast.POSITION.BOTTOM_CENTER,
+    });
+
+  const warningMsg = (message = "") =>
+    toast.warning(message, {
       position: toast.POSITION.BOTTOM_CENTER,
     });
 
@@ -218,29 +214,41 @@ const UpdateProduct = () => {
   }, [dispatch, error, isUpdated, navigate, updateError, product, id]);
 
   const submitHandler = (e) => {
-    // e.preventDefault();
-    console.log(errors);
-    const formData = new FormData();
+    Swal.fire({
+      title: "Update Product",
+      icon: "info",
+      text: "Do you want to update this product?",
+      confirmButtonText: "Yes",
+      showCancelButton: true,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // e.preventDefault();
+        console.log(errors);
+        const formData = new FormData();
 
-    formData.set("name", name);
+        formData.set("name", name);
 
-    formData.set("price", price);
+        formData.set("price", price);
 
-    formData.set("description", description);
+        formData.set("description", description);
 
-    formData.set("category", category);
+        formData.set("category", category);
 
-    formData.set("brand", brand);
+        formData.set("brand", brand);
 
-    formData.set("stock", stock);
+        formData.set("stock", stock);
 
-    formData.set("seller", seller);
+        formData.set("seller", seller);
 
-    images.forEach((image) => {
-      formData.append("images", image);
+        images.forEach((image) => {
+          formData.append("images", image);
+        });
+
+        dispatch(updateProduct(product._id, formData));
+      } else {
+        warningMsg("Canceled update product");
+      }
     });
-
-    dispatch(updateProduct(product._id, formData));
   };
 
   const onChange = (e) => {
@@ -334,10 +342,12 @@ const UpdateProduct = () => {
 
                     <div className="custom-file">
                       <input
-                      {...register("images")}
+                        {...register("images")}
                         type="file"
                         name="images"
-                        className={`form-control m-0 ${errors.images ? "is-invalid" : ""}`}
+                        className={`form-control m-0 ${
+                          errors.images ? "is-invalid" : ""
+                        }`}
                         id="customFile"
                         width="105"
                         height="99"
@@ -350,7 +360,9 @@ const UpdateProduct = () => {
                         Choose Images
                       </label>
 
-                      <p className="text-danger mt-2">{errors.images?.message}</p>
+                      <p className="text-danger mt-2">
+                        {errors.images?.message}
+                      </p>
                     </div>
                   </div>
                 </MDBCol>
@@ -366,7 +378,9 @@ const UpdateProduct = () => {
                           {...register("name")}
                           type="text"
                           id="name_field"
-                          className={`form-control m-0 ${errors.name ? "is-invalid" : ""}`}
+                          className={`form-control m-0 ${
+                            errors.name ? "is-invalid" : ""
+                          }`}
                           value={name}
                           onChange={(e) => setName(e.target.value)}
                         />
@@ -376,10 +390,12 @@ const UpdateProduct = () => {
                         <label>Seller Name</label>
 
                         <input
-                        {...register("seller")}
+                          {...register("seller")}
                           type="text"
                           id="seller_field"
-                          className={`form-control m-0 ${errors.seller ? "is-invalid" : ""}`}
+                          className={`form-control m-0 ${
+                            errors.seller ? "is-invalid" : ""
+                          }`}
                           value={seller}
                           onChange={(e) => setSeller(e.target.value)}
                         />
@@ -392,7 +408,9 @@ const UpdateProduct = () => {
                         <label>Category</label>
                         <select
                           {...register("category")}
-                          className={`form-control m-0 ${errors.category ? "is-invalid" : ""}`}
+                          className={`form-control m-0 ${
+                            errors.category ? "is-invalid" : ""
+                          }`}
                           id="category_field"
                           value={category}
                           onChange={(e) => setCategory(e.target.value)}
@@ -403,14 +421,18 @@ const UpdateProduct = () => {
                             </option>
                           ))}
                         </select>
-                        <p className="text-danger">{errors.category?.message}</p>
+                        <p className="text-danger">
+                          {errors.category?.message}
+                        </p>
                       </div>
                       <div class="col-12 col-sm-6 mt-3 mt-sm-0">
                         <label>Brand</label>
 
                         <select
-                        {...register("brand")}
-                          className={`form-control m-0 ${errors.brand ? "is-invalid" : ""}`}
+                          {...register("brand")}
+                          className={`form-control m-0 ${
+                            errors.brand ? "is-invalid" : ""
+                          }`}
                           id="brand_field"
                           value={brand}
                           onChange={(e) => setBrand(e.target.value)}
@@ -429,10 +451,12 @@ const UpdateProduct = () => {
                       <div class="col-12 col-sm-6">
                         <label>Price</label>
                         <input
-                        {...register("price")}
+                          {...register("price")}
                           type="text"
                           id="price_field"
-                          className={`form-control m-0 ${errors.price ? "is-invalid" : ""}`}
+                          className={`form-control m-0 ${
+                            errors.price ? "is-invalid" : ""
+                          }`}
                           value={price}
                           onChange={(e) => setPrice(e.target.value)}
                         />
@@ -442,10 +466,12 @@ const UpdateProduct = () => {
                         <label>Stock</label>
 
                         <input
-                        {...register("stock")}
+                          {...register("stock")}
                           type="number"
                           id="stock_field"
-                          className={`form-control m-0 ${errors.stock ? "is-invalid" : ""}`}
+                          className={`form-control m-0 ${
+                            errors.stock ? "is-invalid" : ""
+                          }`}
                           value={stock}
                           onChange={(e) => setStock(e.target.value)}
                         />
@@ -457,14 +483,18 @@ const UpdateProduct = () => {
                       <div class="col">
                         <label>Description</label>
                         <textarea
-                        {...register("description")}
-                        className={`form-control m-0 ${errors.description ? "is-invalid" : ""}`}
+                          {...register("description")}
+                          className={`form-control m-0 ${
+                            errors.description ? "is-invalid" : ""
+                          }`}
                           id="description_field"
                           rows="5"
                           value={description}
                           onChange={(e) => setDescription(e.target.value)}
                         ></textarea>
-                        <p className="text-danger">{errors.description?.message}</p>
+                        <p className="text-danger">
+                          {errors.description?.message}
+                        </p>
                       </div>
                     </div>
                     <MDBBtn

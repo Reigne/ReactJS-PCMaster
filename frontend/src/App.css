@@ -7,6 +7,9 @@
   background-color:#ffffff;
 }
 
+body {
+   background-color: #f9f4ef;
+}
 
 li, a{
   cursor: pointer;
@@ -38,6 +41,10 @@ header {
   margin-right: auto;
 }
 
+.nav__links a {
+  color: #433b2b;
+}
+
 .nav__links{
   list-style: none;
 }
@@ -48,18 +55,18 @@ header {
 }
 
 .nav__links li a {
-  transition: all 0.3s ease 0s;
+  transition: all 0.1s ease 0s;
 }
 
 .nav__links li a:hover {
-  color:rgba(0, 136, 169, 0.8);
+  color:#a09070;
 }
 
 .button__nav {
   margin-left: 20px;
   margin-bottom: 15px;
   padding: 9px 25px;
-  background-color: rgba(0, 136, 169,1);
+  background-color: #716040;
   border: none;
   border-radius: 50px;
   cursor: pointer;
@@ -67,7 +74,7 @@ header {
 }
 
 button:hover {
-  background-color: rgba(0, 136, 169, 0.8);
+  background-color: #877e6d;
 }
 
 .container__xmd{

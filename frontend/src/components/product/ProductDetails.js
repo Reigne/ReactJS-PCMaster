@@ -70,22 +70,26 @@ const ProductDetails = () => {
       dispatch({ type: NEW_REVIEW_RESET });
     }
   }, [dispatch, alert, error, reviewError, success, id]);
+
   const increaseQty = () => {
     const count = document.querySelector(".count");
     if (count.valueAsNumber >= product.stock) return;
     const qty = count.valueAsNumber + 1;
     setQuantity(qty);
   };
+
   const decreaseQty = () => {
     const count = document.querySelector(".count");
     if (count.valueAsNumber <= 1) return;
     const qty = count.valueAsNumber - 1;
     setQuantity(qty);
   };
+
   const addToCart = () => {
     dispatch(addItemToCart(id, quantity));
-    // alert.success('Item Added to Cart')
+    successMsg('Product added to your cart')
   };
+
   const successMsg = (message = "") =>
     toast.success(message, {
       position: toast.POSITION.BOTTOM_CENTER,
@@ -95,6 +99,7 @@ const ProductDetails = () => {
     toast.error(error, {
       position: toast.POSITION.BOTTOM_CENTER,
     });
+
   const reviewHandler = () => {
     const formData = new FormData();
     formData.set("rating", rating);
@@ -102,6 +107,7 @@ const ProductDetails = () => {
     formData.set("productId", id);
     dispatch(newReview(formData));
   };
+
   function setUserRatings() {
     const stars = document.querySelectorAll(".star");
     stars.forEach((star, index) => {
