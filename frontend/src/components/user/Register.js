@@ -112,7 +112,7 @@ const Register = () => {
       <MetaData title={"Register User"} />
 
       <MDBContainer>
-        <MDBRow className="d-flex justify-content-center mt-5">
+        <MDBRow className="d-flex justify-content-center mt-5 no-gutters">
           <MDBCol className="rounded-3 shadow-lg p-5 col-10 col-lg-5">
             <form
               className="mt-5"
@@ -208,7 +208,7 @@ const Register = () => {
           </MDBCol>
           <MDBCol className="d-none d-xxl-block col-lg-5">
             <img
-              src="/images/background-1.jpg"
+              src="/images/background-4.gif"
               alt="Store Image"
               className="img-fluid"
               style={{ maxHeight: "700px", overflow: "auto" }}

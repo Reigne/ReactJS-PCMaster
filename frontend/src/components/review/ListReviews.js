@@ -2,15 +2,14 @@ import React from "react";
 
 const ListReviews = ({ reviews }) => {
   return (
-    <div class="reviews w-75">
+    <div class="reviews mt-3">
       <h3>Reviews</h3>
-
+      <hr/>
       {/* <hr /> */}
 
       {reviews &&
         reviews.map((review) => (
-          <div key={review._id} class="review-card my-3">
-            <img src=""/>
+          <div key={review._id} class="review-card my-2">
             <div className="rating-outer">
               <div
                 className="rating-inner"
@@ -18,11 +17,11 @@ const ListReviews = ({ reviews }) => {
               ></div>
             </div>
 
-            <p class="review_user">by {review.name}</p>
+            <p class="text-muted">by {review.name}</p>
 
-            <p class="review_comment">{review.comment}</p>
+            <p class="">{review.comment}</p>
 
-            <hr />
+            <hr/>
           </div>
         ))}
     </div>

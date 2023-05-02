@@ -4,7 +4,6 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  background-color:#ffffff;
 }
 
 body {
@@ -34,6 +33,7 @@ header {
   justify-content: flex-end;
   align-items: center;
   padding: 30px 10%;
+  background-color: #ffffff;
 }
 
 .logo{
@@ -61,6 +61,10 @@ header {
 .nav__links li a:hover {
   color:#a09070;
 }
+
+.nav__links a:hover {
+  border-bottom: 2px solid #a09070;
+  }
 
 .button__nav {
   margin-left: 20px;

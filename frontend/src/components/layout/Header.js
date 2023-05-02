@@ -24,7 +24,6 @@ const Header = () => {
 
   // const { cartItems } = useSelector(state => state.cart)
 
-
   const errMsg = (message = "") =>
     toast.error(message, {
       position: toast.POSITION.BOTTOM_CENTER,
@@ -39,12 +38,14 @@ const Header = () => {
     dispatch(logout());
     successMsg("Logged out successfully.");
   };
-  
+
   const loginHandler = () => {
-     dispatch(login(() => {
-    successMsg("Login successfully!");
-  }));
-  }
+    dispatch(
+      login(() => {
+        successMsg("Login successfully!");
+      })
+    );
+  };
 
   return (
     <Fragment>
@@ -66,8 +67,8 @@ const Header = () => {
             {user ? (
               <ul className="nav__links">
                 <li>
-                  <Link to="/" style={{ color: "black" }}>
-                    <a >Shop</a>
+                  <Link to="/" style={{ textDecoration: "none" }}>
+                    <a>Shop</a>
                   </Link>
                 </li>
                 <li>
@@ -94,7 +95,7 @@ const Header = () => {
                       />
                       &nbsp;{user && user.name}
                     </MDBDropdownToggle>
-                    <MDBDropdownMenu>
+                    <MDBDropdownMenu className="mt-1">
                       {user && user.role === "admin" ? (
                         <Link to="/dashboard">
                           <MDBDropdownItem link>Dashboard</MDBDropdownItem>
@@ -102,15 +103,6 @@ const Header = () => {
                       ) : (
                         <MDBDropdownItem hidden>Dashboard</MDBDropdownItem>
                       )}
-
-                      {/* {user &&
-                        (user.role === "admin") &&
-                        (
-                          <Link to="/dashboard">
-                            <MDBDropdownItem link>Dashboard</MDBDropdownItem>
-                          </Link>
-                        )} */}
-
                       <Link to="/orders/me">
                         <MDBDropdownItem link>My Orders</MDBDropdownItem>
                       </Link>

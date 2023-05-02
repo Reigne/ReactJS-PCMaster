@@ -44,7 +44,7 @@ exports.newProduct = async (req, res, next) => {
 };
 
 exports.getProducts = async (req, res, next) => {
-  const resPerPage = 8;
+  const resPerPage = 12;
   const productsCount = await Product.countDocuments();
   // console.log(productsCount,req.query,Product.find())
   // console.log(Product.find())

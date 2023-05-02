@@ -86,7 +86,7 @@ const Login = () => {
           <MetaData title={"Login"} />
 
           <MDBContainer>
-            <MDBRow className="d-flex justify-content-center mt-5">
+            <MDBRow className="d-flex justify-content-center mt-5 no-gutters">
               <MDBCol className="rounded-3 shadow-lg p-5 col-10 col-lg-5">
                 <form className="mt-5" onSubmit={handleSubmit(submitHandler)}>
                   <h1 className="mb-3 text-center">
@@ -150,7 +150,7 @@ const Login = () => {
                   </div>
                 </form>
               </MDBCol>
-              <MDBCol className="d-none d-xxl-block col-lg-4">
+              <MDBCol className=" d-none d-xxl-block col-lg-4">
                 <img
                   src="/images/background-4.gif"
                   alt="Store Image"
@@ -164,69 +164,6 @@ const Login = () => {
       )}
     </Fragment>
   );
-
-  // turn (
-  //   <Fragment>
-  //     {loading ? (
-  //       <Loader />
-  //     ) : (
-  //       <Fragment>
-  //         <MetaData title={"Login"} />
-
-  //         <div class="d-flex justify-content-center">
-  //           <Container className="container-sm shadow-lg rounded m-3 mt-5">
-  //             <h4 className="mt-4 text-center ">
-  //               <strong>PC-Master</strong>
-  //             </h4>
-  //             <Form>
-  //               <Form.Group
-  //                 as={Row}
-  //                 className="mb-3 mt-4"
-  //                 controlId="formPlaintextEmail"
-  //               >
-  //                 <Form.Label column sm="2">
-  //                   <strong>Email</strong>
-  //                 </Form.Label>
-  //                 <Col sm="10">
-  //                   <Form.Control placeholder="pc-master@example.com" />
-  //                 </Col>
-  //               </Form.Group>
-
-  //               <Form.Group
-  //                 as={Row}
-  //                 className="mb-3"
-  //                 controlId="formPlaintextPassword"
-  //               >
-  //                 <Form.Label column sm="2">
-  //                   <strong>Password</strong>
-  //                 </Form.Label>
-  //                 <Col sm="10">
-  //                   <Form.Control type="password" placeholder="Password" />
-  //                 </Col>
-  //               </Form.Group>
-
-  //               <Form.Group>
-  //                 <Button
-  //                   className="w-100 m-2 mb-0"
-  //                   variant="success"
-  //                   type="submit"
-  //                 >
-  //                   Login
-  //                 </Button>
-  //                 <Form.Text className="mb-3 ml-5 text-muted text-center">
-  //                   Create New Account? <Link>Click here</Link>
-  //                   <Link to="/password/forgot" className="float-right">
-  //                   Forgot Password?
-  //                   </Link>
-  //                 </Form.Text>
-  //               </Form.Group>
-  //             </Form>
-  //           </Container>
-  //         </div>
-  //       </Fragment>
-  //     )}
-  //   </Fragment>
-  // );re
 };
 
 export default Login;

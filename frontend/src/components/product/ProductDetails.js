@@ -87,7 +87,7 @@ const ProductDetails = () => {
 
   const addToCart = () => {
     dispatch(addItemToCart(id, quantity));
-    successMsg('Product added to your cart')
+    successMsg("Product added to your cart");
   };
 
   const successMsg = (message = "") =>
@@ -268,25 +268,34 @@ const ProductDetails = () => {
               </MDBCol>
             </MDBRow>
             <MDBRow>
-              <div className="container-fluid mt-4">
-                <div className="px-5 py-3 shadow-5 rounded-5">
+              <div className="container mt-3">
+                <div className="px-5 py-3 shadow-5 rounded-8">
                   <div className="">
                     {user ? (
-                      <button
-                        id="review_btn"
-                        type="button"
-                        className="btn btn-primary mt-4 float-end"
-                        data-toggle="modal"
-                        data-target="#ratingModal"
-                        onClick={setUserRatings}
-                      >
-                        Submit Your Review
-                      </button>
+                      <div className="d-flex justify-content-end">
+                        <button
+                          id="review_btn"
+                          type="button"
+                          className="btn btn-primary"
+                          data-toggle="modal"
+                          data-target="#ratingModal"
+                          onClick={setUserRatings}
+                        >
+                          Submit Your Review
+                        </button>
+                      </div>
                     ) : (
                       <div className="alert alert-danger mt-5" type="alert">
                         Login to post your review.
                       </div>
                     )}
+
+                    {product.numOfReviews === 0 && (
+                      <p className="mt-3 mb-0 text-muted alert alert-info" type="alert">
+                        Thank you for your interest in our product! We appreciate your consideration. Please note that this product is still new and has not received any reviews yet. However, we believe it is a great product and we stand behind its quality. If you decide to make a purchase, we would love to hear your feedback!
+                      </p>
+                    )}
+                    
                     {product.reviews && product.reviews.length > 0 && (
                       <ListReviews reviews={product.reviews} />
                     )}
@@ -340,12 +349,13 @@ const ProductDetails = () => {
                           placeholder="Insert your review here..."
                         ></textarea>
 
-                        <MDBBtn 
+                        <MDBBtn
                           type="button"
                           className="btn my-4 float-right"
                           data-dismiss="modal"
                           aria-label="Close"
-                          color='secondary'>
+                          color="secondary"
+                        >
                           Close
                         </MDBBtn>
                         <MDBBtn
@@ -356,7 +366,6 @@ const ProductDetails = () => {
                         >
                           Submit
                         </MDBBtn>
-                        
                       </div>
                     </div>
                   </div>

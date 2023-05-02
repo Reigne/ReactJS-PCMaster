@@ -129,7 +129,9 @@ const UpdateProduct = () => {
       .min(0, "Stock must be greater than or equal to zero.")
       .required("Stock is required"),
     seller: yup.string().required("Seller name is required"),
-    images: yup.mixed().required("Images are required"),
+    images: yup
+      .mixed()
+      .required("Images are required"),
     // .test("fileCount", "Please upload at least 1 images", (value) => {
     //   return value && value.length > 0;
     // }),
@@ -351,7 +353,6 @@ const UpdateProduct = () => {
                         id="customFile"
                         width="105"
                         height="99"
-                        value={images}
                         onChange={onChange}
                         multiple
                       />

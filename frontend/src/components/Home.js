@@ -14,14 +14,20 @@ import { getProducts } from "../actions/productActions";
 import Product from "./product/Product";
 import Loader from "./layout/Loader";
 
-import { MDBContainer, MDBRow, MDBCol } from "mdb-react-ui-kit";
-
+import {
+  MDBContainer,
+  MDBRow,
+  MDBCol,
+  MDBCarousel,
+  MDBCarouselItem,
+} from "mdb-react-ui-kit";
+import { Carousel } from "react-bootstrap";
 const Home = () => {
   const [hasMore, sethasMore] = useState(true);
   const [items, setItems] = useState([]);
   const [page, setpage] = useState(2);
   const dispatch = useDispatch();
-  
+
   const {
     loading,
     products,
@@ -74,7 +80,7 @@ const Home = () => {
       notify(error);
     }
     dispatch(getProducts(keyword, currentPage, price, category));
-  }, [dispatch, error, currentPage, keyword, price, category]);
+  }, [dispatch, error, currentPage, keyword, price]);
 
   function setCurrentPageNo(pageNumber) {
     setCurrentPage(pageNumber);
@@ -82,7 +88,7 @@ const Home = () => {
   let count = productsCount;
 
   if (keyword) {
-    let count = filteredProductsCount;
+    let count = productsCount;
   }
   console.log(keyword, count, filteredProductsCount, resPerPage);
 
@@ -95,74 +101,99 @@ const Home = () => {
           <MetaData title={"Buy Best Products Online"} />
           {/* <h1 id="products_heading">Latest Products</h1> */}
 
-          <section id="products" className="container mt-5">
-            {/* <div className="row">
-                            {products && products.map(product => (
-                                <Product key={product._id} product={product} />
-                            ))}
-                        </div> */}
+          <section id="products" className="container mt-2">
+            <MDBContainer>
+              <div className="justify-content-center mr-4">
+                {/* <img
+                  className="img-fluid d-block mx-auto"
+                  src="/images/header2.png"
+                  alt="Order Success"
+                  width="125
+                  0"
+                /> */}
 
-            <div className="row">
-              {keyword ? (
-                <Fragment>
-                  <MDBCol className="col-6 col-md-3">
-                    <div className="shadow-5 rounded-8 pl-0 p-5 mb-3">
-                      <h4 className="mb-2">Price Range</h4>
-                      <Range
-                        marks={{
-                          1: `$1`,
-                          1000: `$1000`,
-                        }}
-                        min={1}
-                        max={1000}
-                        defaultValue={[1, 1000]}
-                        tipFormatter={(value) => `$${value}`}
-                        tipProps={{
-                          placement: "bottom",
-                          visible: true,
-                        }}
-                        value={price}
-                        onChange={(price) => setPrice(price)}
-                      />
-                    </div>
+                <Carousel>
+                  <Carousel.Item>
+                    <img
+                      className="d-block w-100"
+                      src="/images/header.png"
+                      alt="First slide"
+                    />
+                  </Carousel.Item>
+                  <Carousel.Item>
+                    <img
+                      className="d-block w-100"
+                      src="/images/header4.png"
+                      alt="Second slide"
+                    />
+                  </Carousel.Item>
+                  <Carousel.Item>
+                    <img
+                      className="d-block w-100"
+                      src="/images/header5.png"
+                      alt="Third slide"
+                    />
+                  </Carousel.Item>
+                </Carousel>
+              </div>
+              <div className="row mt-4">
+                {keyword ? (
+                  <Fragment>
+                    <MDBCol className="col-6 col-md-3">
+                      <div className="shadow-5 rounded-8 pl-0 p-5 mb-3">
+                        <h4 className="mb-2">Price Range</h4>
+                        <Range
+                          marks={{
+                            1: `$1`,
+                            1000: `$1000`,
+                          }}
+                          min={1}
+                          max={1000}
+                          defaultValue={[1, 1000]}
+                          tipFormatter={(value) => `$${value}`}
+                          tipProps={{
+                            placement: "bottom",
+                            visible: true,
+                          }}
+                          value={price}
+                          onChange={(price) => setPrice(price)}
+                        />
+                      </div>
 
-                    <div className="shadow-5 rounded-8 p-4  ">
-                      <h4 className="mb-2">Categories</h4>
-                      <ul className="pl-0">
-                        {categories.map((category) => (
-                          <li
-                            style={{
-                              cursor: "pointer",
-                              listStyleType: "none",
-                            }}
-                            key={category}
-                            onClick={() => setCategory(category)}
-                          >
-                            {category}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </MDBCol>
+                      <div className="shadow-5 rounded-8 p-4  ">
+                        <h4 className="mb-2">Categories</h4>
+                        <ul className="pl-0">
+                          {categories.map((category) => (
+                            <li
+                              style={{
+                                cursor: "pointer",
+                                listStyleType: "none",
+                              }}
+                              key={category}
+                              onClick={() => setCategory(category)}
+                            >
+                              {category}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </MDBCol>
 
-                  <MDBCol className="col-6 col-md-9">
-                    <div className="row">
+                    <MDBCol className="col-12 col-lg-9">
+                      <div className="row">
                         {products.map((product) => (
-                          <Product
-                            key={product._id}
-                            product={product}
-                            col={4}
-                          />
+                          <Product key={product._id} product={product} />
                         ))}
-                    </div>
-                  </MDBCol>
-                </Fragment>
-              ) : (
-                products.map((product) => (
-                  <Product key={product._id} product={product} col={3} />
-                ))
-              )}
-            </div>
+                      </div>
+                    </MDBCol>
+                  </Fragment>
+                ) : (
+                  products.map((product) => (
+                    <Product key={product._id} product={product} col={3} />
+                  ))
+                )}
+              </div>
+            </MDBContainer>
           </section>
           {resPerPage <= count && (
             <div className="d-flex justify-content-center mt-5">
