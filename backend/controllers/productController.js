@@ -4,9 +4,6 @@ const APIFeatures = require("../utils/apiFeatures");
 const ErrorHandler = require('../utils/errorHandler')
 const cloudinary = require("cloudinary");
 
-
-
-
 exports.newProduct = async (req, res, next) => {
   let images = [];
 
@@ -46,23 +43,18 @@ exports.newProduct = async (req, res, next) => {
 exports.getProducts = async (req, res, next) => {
   const resPerPage = 12;
   const productsCount = await Product.countDocuments();
-  // console.log(productsCount,req.query,Product.find())
-  // console.log(Product.find())
+
   const apiFeatures = new APIFeatures(Product.find(), req.query)
     .search()
     .filter();
-  // const apiFeatures = new APIFeatures(Product.find(), req.query).search()
 
-  // const products = await Product.find();
   apiFeatures.pagination(resPerPage);
   let products = await apiFeatures.query;
   let filteredProductsCount = products.length;
   apiFeatures.pagination(resPerPage);
 
-  // console.log(products)
   res.status(200).json({
     success: true,
-    // count: products.length,
     productsCount,
     products,
     resPerPage,

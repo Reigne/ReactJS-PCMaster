@@ -1,17 +1,25 @@
 import React, { Fragment, useEffect, useState } from "react";
+
 import MetaData from "./layout/MetaData";
+
 import { useParams } from "react-router-dom";
+
 import Pagination from "react-js-pagination";
+
 import { toast } from "react-toastify";
+
 import "react-toastify/dist/ReactToastify.css";
 
 import Slider, { Range, createSliderWithTooltip } from "rc-slider";
+
 import "rc-slider/assets/index.css";
 
 import { useDispatch, useSelector } from "react-redux";
 
 import { getProducts } from "../actions/productActions";
+
 import Product from "./product/Product";
+
 import Loader from "./layout/Loader";
 
 import {
@@ -21,7 +29,9 @@ import {
   MDBCarousel,
   MDBCarouselItem,
 } from "mdb-react-ui-kit";
+
 import { Carousel } from "react-bootstrap";
+
 const Home = () => {
   const [hasMore, sethasMore] = useState(true);
   const [items, setItems] = useState([]);
@@ -36,6 +46,7 @@ const Home = () => {
     resPerPage,
     filteredProductsCount,
   } = useSelector((state) => state.products);
+
   const [currentPage, setCurrentPage] = useState(1);
   const [price, setPrice] = useState([1, 1000]);
   const [category, setCategory] = useState("");
