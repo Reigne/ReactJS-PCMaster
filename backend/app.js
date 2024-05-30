@@ -12,7 +12,7 @@ const app = express();
 //     credentials: true
 // }));
 
-const allowedOrigins = ["https://pc-master-api.vercel.app"];
+const allowedOrigins = ["https://pc-master.vercel.app"];
 
 // app.use(express.json());
 // app.use(express.urlencoded({ limit: "50mb", extended: true }));
