@@ -192,14 +192,14 @@ const Home = () => {
 
                     <MDBCol className="col-12 col-lg-9">
                       <div className="row">
-                        {products.map((product) => (
+                        {products?.map((product) => (
                           <Product key={product._id} product={product} />
                         ))}
                       </div>
                     </MDBCol>
                   </Fragment>
                 ) : (
-                  products.map((product) => (
+                  products?.map((product) => (
                     <Product key={product._id} product={product} col={3} />
                   ))
                 )}
