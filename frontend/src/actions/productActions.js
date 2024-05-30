@@ -32,41 +32,37 @@ import {
   DELETE_REVIEW_FAIL,
 } from "../constants/productConstants";
 
-export const getProducts = (
-  keyword = "",
-  currentPage = 1,
-  price,
-  category
-) => async (dispatch) => {
-  try {
-    dispatch({
-      type: ALL_PRODUCTS_REQUEST,
-      ADMIN_PRODUCTS_REQUEST,
-    });
+export const getProducts =
+  (keyword = "", currentPage = 1, price, category) =>
+  async (dispatch) => {
+    try {
+      dispatch({
+        type: ALL_PRODUCTS_REQUEST,
+        ADMIN_PRODUCTS_REQUEST,
+      });
 
-    let link = `/api/v1/products?keyword=${keyword}&page=${currentPage}&price[lte]=${price[1]}&price[gte]=${price[0]}`;
-    
-    if (category) {
-      link = `/api/v1/products?keyword=${keyword}&page=${currentPage}&price[lte]=${price[1]}&price[gte]=${price[0]}&category=${category}`;
+      let link = `${process.env.REACT_APP_API}/api/v1/products?keyword=${keyword}&page=${currentPage}&price[lte]=${price[1]}&price[gte]=${price[0]}`;
+
+      if (category) {
+        link = `${process.env.REACT_APP_API}/api/v1/products?keyword=${keyword}&page=${currentPage}&price[lte]=${price[1]}&price[gte]=${price[0]}&category=${category}`;
+      }
+
+      const { data } = await axios.get(link);
+      console.log(link);
+
+      dispatch({
+        type: ALL_PRODUCTS_SUCCESS,
+        ADMIN_PRODUCTS_SUCCESS,
+        payload: data,
+      });
+    } catch (error) {
+      dispatch({
+        type: ALL_PRODUCTS_FAIL,
+        ADMIN_PRODUCTS_FAIL,
+        payload: error.response.data.message,
+      });
     }
-
-    const { data } = await axios.get(link);
-    console.log(link);
-
-    dispatch({
-      type: ALL_PRODUCTS_SUCCESS,
-      ADMIN_PRODUCTS_SUCCESS,
-      payload: data,
-    });
-
-  } catch (error) {
-    dispatch({
-      type: ALL_PRODUCTS_FAIL,
-      ADMIN_PRODUCTS_FAIL,
-      payload: error.response.data.message,
-    });
-  }
-};
+  };
 
 export const clearErrors = () => async (dispatch) => {
   dispatch({
@@ -78,7 +74,10 @@ export const getProductDetails = (id) => async (dispatch) => {
   try {
     dispatch({ type: PRODUCT_DETAILS_REQUEST });
 
-    const { data } = await axios.get(`${process.env.REACT_APP_API}/api/v1/product/${id}`, {withCredentials: true});
+    const { data } = await axios.get(
+      `${process.env.REACT_APP_API}/api/v1/product/${id}`,
+      { withCredentials: true }
+    );
 
     dispatch({
       type: PRODUCT_DETAILS_SUCCESS,
@@ -134,7 +133,11 @@ export const newReview = (reviewData) => async (dispatch) => {
       withCredentials: true,
     };
 
-    const { data } = await axios.put(`${process.env.REACT_APP_API}/api/v1/review`, reviewData, config);
+    const { data } = await axios.put(
+      `${process.env.REACT_APP_API}/api/v1/review`,
+      reviewData,
+      config
+    );
 
     dispatch({
       type: NEW_REVIEW_SUCCESS,
@@ -154,7 +157,10 @@ export const getAdminProducts = () => async (dispatch) => {
   try {
     dispatch({ type: ADMIN_PRODUCTS_REQUEST });
 
-    const { data } = await axios.get(`${process.env.REACT_APP_API}/api/v1/admin/products`, {withCredentials: true});
+    const { data } = await axios.get(
+      `${process.env.REACT_APP_API}/api/v1/admin/products`,
+      { withCredentials: true }
+    );
 
     dispatch({
       type: ADMIN_PRODUCTS_SUCCESS,
@@ -205,7 +211,10 @@ export const deleteProduct = (id) => async (dispatch) => {
   try {
     dispatch({ type: DELETE_PRODUCT_REQUEST });
 
-    const { data } = await axios.delete(`${process.env.REACT_APP_API}/api/v1/admin/product/${id}`, {withCredentials: true});
+    const { data } = await axios.delete(
+      `${process.env.REACT_APP_API}/api/v1/admin/product/${id}`,
+      { withCredentials: true }
+    );
 
     dispatch({
       type: DELETE_PRODUCT_SUCCESS,
@@ -260,7 +269,10 @@ export const getProductReviews = (id) => async (dispatch) => {
   try {
     dispatch({ type: GET_REVIEWS_REQUEST });
 
-    const { data } = await axios.get(`${process.env.REACT_APP_API}/api/v1/reviews?id=${id}`, {withCredentials: true});
+    const { data } = await axios.get(
+      `${process.env.REACT_APP_API}/api/v1/reviews?id=${id}`,
+      { withCredentials: true }
+    );
 
     dispatch({
       type: GET_REVIEWS_SUCCESS,
@@ -283,7 +295,8 @@ export const deleteReview = (id, productId) => async (dispatch) => {
     dispatch({ type: DELETE_REVIEW_REQUEST });
 
     const { data } = await axios.delete(
-      `${process.env.REACT_APP_API}/api/v1/reviews?id=${id}&productId=${productId}`, {withCredentials: true}
+      `${process.env.REACT_APP_API}/api/v1/reviews?id=${id}&productId=${productId}`,
+      { withCredentials: true }
     );
 
     dispatch({
