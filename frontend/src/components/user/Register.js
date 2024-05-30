@@ -184,6 +184,7 @@ const Register = () => {
                     <input
                       type="file"
                       name="avatar"
+                      onChange={onChange}
                       className="custom-file-input"
                       id="customFile"
                       accept="images/*"
