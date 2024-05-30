@@ -8,7 +8,7 @@ var cors = require("cors");
 const app = express();
 // const fileUpload = require('express-fileupload')
 app.use(cors({
-    origin: "http://localhost:3000",
+    origin: "https://pc-master-api.vercel.app",
     credentials: true
 }));
 // app.use(express.json());
