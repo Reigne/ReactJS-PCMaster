@@ -6,6 +6,7 @@ const { isAuthenticatedUser,
     authorizeRoles
 } = require('../middlewares/auth');
 const { registerUser, loginUser, logout, forgotPassword, resetPassword, getUserProfile, updatePassword, updateProfile, allUsers, getUserDetails, updateUser, deleteUser} = require('../controllers/authController');
+
 router.post('/register', upload.single("avatar"),registerUser);
 router.post('/login', loginUser);
 
